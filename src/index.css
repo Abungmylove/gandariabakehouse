@@ -1,26 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-sans: "Nunito", sans-serif;
+  --font-display: "Oswald", sans-serif;
+  --font-logo: "Fredoka", sans-serif;
   
-  --color-brand-bg: #FDF9F1;
-  --color-brand-card: #F4EBE1;
-  --color-brand-text: #4A3320;
-  --color-brand-primary: #8B5E34;
-  --color-brand-primary-hover: #734a28;
-  --color-brand-light: #F9F4EC;
-  --color-brand-border: #E8D9C8;
+  --color-brand-bg: #FDF6EA;
+  --color-brand-brown: #4A3122;
+  --color-brand-brown-light: #5d3d2b;
+  --color-brand-red: #D15B46;
+  --color-brand-red-light: #df6853;
+  --color-brand-tan: #EADAC1;
+  --color-brand-yellow: #F4D068;
 }
 
 @utility section-padding {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 body {
   background-color: var(--color-brand-bg);
-  color: var(--color-brand-text);
+  color: var(--color-brand-brown);
   overflow-x: hidden;
 }
 
@@ -28,11 +29,29 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for horizontal lists if needed */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Wavy top edge for the hero if needed, but rounded is safer */
+.scallop-edge {
+  background: radial-gradient(circle at 10px 0, transparent 10px, var(--color-brand-bg) 11px);
+  background-size: 20px 20px;
+  background-position: -10px 0;
+  background-repeat: repeat-x;
+}
+
+.red-stripes {
+  background-color: var(--color-brand-red);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 40px,
+    rgba(0,0,0,0.03) 40px,
+    rgba(0,0,0,0.03) 80px
+  );
 }
