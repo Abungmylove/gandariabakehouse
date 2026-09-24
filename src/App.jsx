@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, ArrowRight, Instagram, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Star, Quote, Calculator, X, Calendar, ClipboardList, Info, QrCode, CheckCircle2, MessageCircle } from 'lucide-react';
+import { ShoppingBag, ArrowRight, Globe, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Star, Quote, Calculator, X, Calendar, ClipboardList, Info, QrCode, CheckCircle2, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './index.css';
 
@@ -270,7 +270,7 @@ function App() {
                <a href="#" className="hover:text-brand-yellow transition">Catering</a>
              </div>
              <div className="flex gap-3">
-               <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-brown transition"><Instagram className="w-4 h-4" /></a>
+               <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-brown transition"><Globe className="w-4 h-4" /></a>
                <a href="#" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-yellow hover:text-brand-brown transition"><Mail className="w-4 h-4" /></a>
              </div>
           </div>
