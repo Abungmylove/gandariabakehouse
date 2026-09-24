@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+  
+  --color-brand-bg: #FDF9F1;
+  --color-brand-card: #F4EBE1;
+  --color-brand-text: #4A3320;
+  --color-brand-primary: #8B5E34;
+  --color-brand-primary-hover: #734a28;
+  --color-brand-light: #F9F4EC;
+  --color-brand-border: #E8D9C8;
+}
+
+@utility section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for horizontal lists if needed */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
