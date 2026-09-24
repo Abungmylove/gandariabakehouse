@@ -39,22 +39,19 @@ function App() {
         
         {/* Navbar */}
         <nav className="max-w-7xl mx-auto flex items-center justify-between z-40 relative mb-8">
-          <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-wider uppercase text-white/80">
+          <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-wider uppercase text-white/80 lg:w-1/3">
             <a href="#about" className="hover:text-white transition">Tentang</a>
             <a href="#menu" className="hover:text-white transition">Menu</a>
           </div>
 
-          <div className="flex-1 flex justify-center lg:justify-center">
+          <div className="flex-1 lg:w-1/3 flex justify-start lg:justify-center">
             <h1 className="font-logo text-4xl font-bold tracking-tight text-white lowercase">gandaria</h1>
           </div>
           
-          <div className="hidden lg:flex items-center gap-8 text-xs font-bold tracking-wider uppercase text-white/80">
-            <a href="#catering" className="hover:text-white transition">Katering</a>
-            <a href="#contact" className="hover:text-white transition">Kontak</a>
-          </div>
-
-          <div className="flex items-center gap-4 lg:absolute lg:right-0">
-             <button onClick={() => setIsModalOpen(true)} className="text-white hover:text-brand-red transition">
+          <div className="flex items-center justify-end gap-4 lg:gap-8 text-xs font-bold tracking-wider uppercase text-white/80 lg:w-1/3">
+            <a href="#catering" className="hidden lg:block hover:text-white transition">Katering</a>
+            <a href="#contact" className="hidden lg:block hover:text-white transition">Kontak</a>
+            <button onClick={() => setIsModalOpen(true)} className="text-white hover:text-brand-yellow transition cursor-pointer">
               <ShoppingBag className="w-6 h-6" />
             </button>
           </div>
@@ -135,9 +132,9 @@ function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {[
-            { cat: "Spesial", name: "Roti Buaya Pamulang", price: "Rp 150.000", img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop" },
-            { cat: "Camilan", name: "Cookies Homemade", price: "Rp 20.000", img: "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=500&auto=format&fit=crop" },
-            { cat: "Roti", name: "Sourdough Boule", price: "Rp 35.000", img: "https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=500&auto=format&fit=crop" }
+            { cat: "Spesial", name: "Roti Buaya Pamulang", price: "Rp 150.000", img: "https://images.unsplash.com/photo-1555507036-ab1e4006a110?q=80&w=500&auto=format&fit=crop" },
+            { cat: "Camilan", name: "Cookies Homemade", price: "Rp 20.000", img: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=500&auto=format&fit=crop" },
+            { cat: "Roti", name: "Sourdough Boule", price: "Rp 35.000", img: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=500&auto=format&fit=crop" }
           ].map((prod, i) => (
             <motion.div 
               key={i}
