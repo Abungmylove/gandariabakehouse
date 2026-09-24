@@ -179,6 +179,36 @@ function App() {
         </div>
       </section>
 
+      {/* Catering Section */}
+      <section id="catering" className="section-padding px-4 md:px-8 lg:px-16 text-center">
+        <span className="text-xs font-bold tracking-[0.2em] text-brand-text/60 uppercase mb-4 flex items-center justify-center gap-2">
+          <span className="w-6 h-px bg-brand-text/30"></span>
+          Corporate Events
+          <span className="w-6 h-px bg-brand-text/30"></span>
+        </span>
+        <h2 className="font-serif text-4xl mb-6">Corporate Catering</h2>
+        <p className="text-brand-text/60 max-w-2xl mx-auto mb-12 text-sm leading-relaxed">
+          Catering for your office meetings or events just got heaps better! Choose from our selection of pastries along with extras exclusive to our catering menu. We ensure everything arrives fresh and ready to impress your clients and team.
+        </p>
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
+          <motion.img 
+            initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec?q=80&w=2069&auto=format&fit=crop" 
+            alt="Catering Pastries" 
+            className="w-full h-64 object-cover rounded-sm shadow-md" 
+          />
+          <motion.img 
+            initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}
+            src="https://images.unsplash.com/photo-1598946423291-1b7fda201940?q=80&w=1974&auto=format&fit=crop" 
+            alt="Coffee Setup" 
+            className="w-full h-64 object-cover rounded-sm shadow-md" 
+          />
+        </div>
+        <a href="mailto:hello@gandariabakehouse.com" className="inline-block bg-brand-primary text-white px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-brand-primary-hover transition">
+          Enquire Now
+        </a>
+      </section>
+
       {/* 6. Featured Products */}
       <section className="section-padding px-4 md:px-8 lg:px-16 bg-brand-light text-center relative">
         <span className="text-xs font-bold tracking-[0.2em] text-brand-text/60 uppercase mb-4 flex items-center justify-center gap-2">
