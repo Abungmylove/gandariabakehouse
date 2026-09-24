@@ -8,25 +8,61 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 };
 
+const MENU_ITEMS = [
+  { id: 'buaya', cat: "Spesial", name: "Roti Buaya Pamulang", price: 150000, img: "https://images.unsplash.com/photo-1555507036-ab1e4006a110?q=80&w=500&auto=format&fit=crop" },
+  { id: 'cookies', cat: "Camilan", name: "Cookies Homemade", price: 20000, img: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=500&auto=format&fit=crop" },
+  { id: 'sourdough', cat: "Roti", name: "Sourdough Boule", price: 35000, img: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=500&auto=format&fit=crop" },
+  { id: 'seeded', cat: "Roti", name: "Seeded Whole Grain", price: 40000, img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop" },
+  { id: 'rosemary', cat: "Roti", name: "Rosemary Focaccia", price: 30000, img: "https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=500&auto=format&fit=crop" }
+];
+
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [serviceType, setServiceType] = useState(35000); // price per unit
-  const [quantity, setQuantity] = useState(1);
+  const [cart, setCart] = useState({});
   const [name, setName] = useState('');
   const [deadline, setDeadline] = useState('');
   const [notes, setNotes] = useState('');
 
-  const calculateTotal = () => serviceType * quantity;
+  const openModalWithItem = (itemId = null) => {
+    if (itemId) {
+      setCart(prev => ({ ...prev, [itemId]: (prev[itemId] || 0) + 1 }));
+    }
+    setIsModalOpen(true);
+  };
+
+  const updateCart = (itemId, delta) => {
+    setCart(prev => {
+      const current = prev[itemId] || 0;
+      const next = Math.max(0, current + delta);
+      return { ...prev, [itemId]: next };
+    });
+  };
+
+  const calculateTotal = () => {
+    return MENU_ITEMS.reduce((sum, item) => sum + (cart[item.id] || 0) * item.price, 0);
+  };
+
+  const getTotalItems = () => {
+    return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+  };
 
   const handleCheckout = () => {
-    let menuName = "Sourdough Boule";
-    if (serviceType === 40000) menuName = "Seeded Whole Grain";
-    if (serviceType === 30000) menuName = "Rosemary Focaccia";
-    if (serviceType === 20000) menuName = "Cookies Homemade";
-    if (serviceType === 150000) menuName = "Roti Buaya Pamulang";
+    const orderedItems = MENU_ITEMS.filter(item => cart[item.id] > 0);
+    
+    if (orderedItems.length === 0) {
+      alert("Pilih minimal 1 menu dulu ya!");
+      return;
+    }
 
+    if (!name || !deadline) {
+      alert("Mohon lengkapi Nama dan Tanggal Pengiriman!");
+      return;
+    }
+
+    const menuListStr = orderedItems.map(item => `- ${item.name} (${cart[item.id]} pcs)`).join('\n');
     const total = calculateTotal().toLocaleString('id-ID');
-    const msg = `Halo Gandaria Bakehouse, saya mau pesan:\n\nMenu: ${menuName}\nJumlah: ${quantity} pcs\nTanggal Pengiriman: ${deadline}\nNama: ${name}\nCatatan: ${notes}\n\nEstimasi Total: Rp ${total}\n\nMohon info ketersediaan dan QRIS-nya ya!`;
+    
+    const msg = `Halo Gandaria Bakehouse, saya mau pesan:\n\n${menuListStr}\n\nTanggal Pengiriman: ${deadline}\nNama: ${name}\nCatatan: ${notes || '-'}\n\nEstimasi Total: Rp ${total}\n\nMohon info ketersediaan dan QRIS-nya ya!`;
     const waUrl = `https://wa.me/6287802067617?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
   };
@@ -51,8 +87,13 @@ function App() {
           <div className="flex items-center justify-end gap-4 lg:gap-8 text-xs font-bold tracking-wider uppercase text-white/80 lg:w-1/3">
             <a href="#catering" className="hidden lg:block hover:text-white transition">Katering</a>
             <a href="#contact" className="hidden lg:block hover:text-white transition">Kontak</a>
-            <button onClick={() => setIsModalOpen(true)} className="text-white hover:text-brand-yellow transition cursor-pointer">
+            <button onClick={() => setIsModalOpen(true)} className="text-white hover:text-brand-yellow transition cursor-pointer relative">
               <ShoppingBag className="w-6 h-6" />
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-2 -right-2 bg-brand-red text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {getTotalItems()}
+                </span>
+              )}
             </button>
           </div>
         </nav>
@@ -131,13 +172,9 @@ function App() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {[
-            { cat: "Spesial", name: "Roti Buaya Pamulang", price: "Rp 150.000", img: "https://images.unsplash.com/photo-1555507036-ab1e4006a110?q=80&w=500&auto=format&fit=crop" },
-            { cat: "Camilan", name: "Cookies Homemade", price: "Rp 20.000", img: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=500&auto=format&fit=crop" },
-            { cat: "Roti", name: "Sourdough Boule", price: "Rp 35.000", img: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=500&auto=format&fit=crop" }
-          ].map((prod, i) => (
+          {MENU_ITEMS.slice(0, 3).map((prod, i) => (
             <motion.div 
-              key={i}
+              key={prod.id}
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="bg-brand-tan rounded-[2rem] p-6 text-left flex flex-col group hover:shadow-xl transition-shadow"
             >
@@ -147,8 +184,8 @@ function App() {
               <span className="text-[10px] font-black uppercase text-brand-brown/50 tracking-widest mb-1">{prod.cat}</span>
               <h3 className="font-display font-bold text-xl mb-4 leading-tight">{prod.name}</h3>
               <div className="mt-auto flex justify-between items-center pt-4 border-t border-brand-brown/10">
-                <span className="font-bold">{prod.price}</span>
-                <button onClick={() => setIsModalOpen(true)} className="bg-brand-brown text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1 hover:bg-brand-brown-light transition shadow-md">
+                <span className="font-bold">Rp {prod.price.toLocaleString('id-ID')}</span>
+                <button onClick={() => openModalWithItem(prod.id)} className="bg-brand-brown text-white px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1 hover:bg-brand-brown-light transition shadow-md cursor-pointer">
                    PESAN +
                 </button>
               </div>
@@ -156,7 +193,7 @@ function App() {
           ))}
         </div>
         
-        <button onClick={() => setIsModalOpen(true)} className="bg-brand-brown text-white px-8 py-3 rounded-full text-xs font-black tracking-widest hover:bg-brand-brown-light transition uppercase shadow-md">
+        <button onClick={() => setIsModalOpen(true)} className="bg-brand-brown text-white px-8 py-3 rounded-full text-xs font-black tracking-widest hover:bg-brand-brown-light transition uppercase shadow-md cursor-pointer">
           Lihat Semua & Pesan &rarr;
         </button>
       </section>
@@ -302,11 +339,11 @@ function App() {
                     <ShoppingBag className="w-8 h-8" />
                   </div>
                   <div>
-                    <h2 className="font-display text-2xl font-bold uppercase tracking-wide leading-none mb-1">Form Pemesanan</h2>
+                    <h2 className="font-display text-2xl font-bold uppercase tracking-wide leading-none mb-1">Keranjang Pesanan</h2>
                     <p className="text-white/80 text-sm font-semibold">Pesan pastry & roti favoritmu, fresh dari oven!</p>
                   </div>
                 </div>
-                <button onClick={() => setIsModalOpen(false)} className="text-white/60 hover:text-white bg-white/10 p-2 rounded-full transition">
+                <button onClick={() => setIsModalOpen(false)} className="text-white/60 hover:text-white bg-white/10 p-2 rounded-full transition cursor-pointer">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -314,42 +351,35 @@ function App() {
               {/* Modal Body */}
               <div className="p-6 md:p-8 space-y-8">
                 
-                {/* Section 1: Selection */}
+                {/* Section 1: Menu List */}
                 <div className="bg-white p-6 rounded-2xl border border-[#ebd8c1] shadow-sm">
-                  <h3 className="flex items-center gap-2 text-[#a87a5f] font-bold text-sm mb-4 uppercase tracking-wider">
-                    <ClipboardList className="w-4 h-4" /> 1. Pilih Menu & Jumlah
+                  <h3 className="flex items-center gap-2 text-[#a87a5f] font-bold text-sm mb-4 uppercase tracking-wider border-b border-[#ebd8c1] pb-3">
+                    <ClipboardList className="w-4 h-4" /> 1. Atur Pesanan Anda
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    <div className="md:col-span-2">
-                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Pilih Menu</label>
-                      <select 
-                        value={serviceType}
-                        onChange={(e) => setServiceType(Number(e.target.value))}
-                        className="w-full bg-white border border-[#ebd8c1] rounded-xl px-4 py-3 text-sm font-semibold text-brand-brown outline-none focus:border-[#a87a5f]"
-                      >
-                        <option value={35000}>Sourdough Boule — Rp 35.000</option>
-                        <option value={40000}>Seeded Whole Grain — Rp 40.000</option>
-                        <option value={30000}>Rosemary Focaccia — Rp 30.000</option>
-                        <option value={20000}>Cookies Homemade — Rp 20.000</option>
-                        <option value={150000}>Roti Buaya Pamulang — Rp 150.000</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Jumlah (pcs)</label>
-                      <input 
-                        type="number" 
-                        min="1"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
-                        className="w-full bg-white border border-[#ebd8c1] rounded-xl px-4 py-3 text-sm font-bold text-brand-brown outline-none focus:border-[#a87a5f]"
-                      />
-                    </div>
+                  <div className="flex flex-col gap-4 mb-6 max-h-[250px] overflow-y-auto pr-2">
+                    {MENU_ITEMS.map((item) => (
+                      <div key={item.id} className="flex justify-between items-center p-3 rounded-xl hover:bg-[#fef8ef] transition">
+                        <div className="flex items-center gap-3">
+                          <img src={item.img} alt={item.name} className="w-12 h-12 object-cover rounded-lg border border-[#ebd8c1]" />
+                          <div>
+                            <p className="font-bold text-sm text-[#a87a5f]">{item.name}</p>
+                            <p className="text-xs text-brand-brown/60 font-semibold">Rp {item.price.toLocaleString('id-ID')}</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-center gap-3 bg-white border border-[#ebd8c1] rounded-full p-1 shadow-sm">
+                          <button onClick={() => updateCart(item.id, -1)} className="w-7 h-7 rounded-full bg-[#fef8ef] text-[#a87a5f] flex items-center justify-center font-bold hover:bg-[#ebd8c1] transition cursor-pointer">-</button>
+                          <span className="w-4 text-center font-bold text-sm text-[#a87a5f]">{cart[item.id] || 0}</span>
+                          <button onClick={() => updateCart(item.id, 1)} className="w-7 h-7 rounded-full bg-[#a87a5f] text-white flex items-center justify-center font-bold hover:bg-[#8f664e] transition cursor-pointer">+</button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
 
-                  <div className="bg-[#fef8ef] border border-[#ebd8c1] rounded-2xl p-5 flex items-center justify-between">
+                  <div className="bg-[#fef8ef] border border-[#ebd8c1] rounded-2xl p-5 flex items-center justify-between mt-4">
                     <div>
-                      <p className="text-xs font-bold text-[#a87a5f] mb-1">Estimasi Biaya Awal:</p>
+                      <p className="text-xs font-bold text-[#a87a5f] mb-1">Total Belanja:</p>
                       <p className="text-3xl font-display font-bold text-[#a87a5f]">Rp {calculateTotal().toLocaleString('id-ID')}</p>
                     </div>
                     <div className="text-right">
@@ -428,13 +458,13 @@ function App() {
               <div className="bg-white p-6 rounded-b-3xl border-t border-[#ebd8c1] flex flex-col sm:flex-row gap-3">
                 <button 
                   onClick={handleCheckout}
-                  className="flex-1 bg-[#f0a528] hover:bg-[#e09517] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow-md"
+                  className="flex-1 bg-[#f0a528] hover:bg-[#e09517] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition shadow-md cursor-pointer"
                 >
                   <MessageCircle className="w-5 h-5" /> Kirim Pesanan ke WhatsApp Admin
                 </button>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="sm:w-32 bg-white border border-[#ebd8c1] text-brand-brown hover:bg-gray-50 py-4 rounded-xl font-bold transition"
+                  className="sm:w-32 bg-white border border-[#ebd8c1] text-brand-brown hover:bg-gray-50 py-4 rounded-xl font-bold transition cursor-pointer"
                 >
                   Batal
                 </button>
