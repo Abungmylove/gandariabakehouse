@@ -10,8 +10,8 @@ const fadeUp = {
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [serviceType, setServiceType] = useState(5000); // price per unit
-  const [quantity, setQuantity] = useState(5);
+  const [serviceType, setServiceType] = useState(35000); // price per unit
+  const [quantity, setQuantity] = useState(1);
   const [name, setName] = useState('');
   const [deadline, setDeadline] = useState('');
   const [notes, setNotes] = useState('');
@@ -19,9 +19,14 @@ function App() {
   const calculateTotal = () => serviceType * quantity;
 
   const handleCheckout = () => {
-    const serviceName = serviceType === 5000 ? "PPT Presentasi" : serviceType === 10000 ? "Makalah / Artikel" : "Tugas Lainnya";
+    let menuName = "Sourdough Boule";
+    if (serviceType === 40000) menuName = "Seeded Whole Grain";
+    if (serviceType === 30000) menuName = "Rosemary Focaccia";
+    if (serviceType === 20000) menuName = "Cookies Homemade";
+    if (serviceType === 150000) menuName = "Roti Buaya Pamulang";
+
     const total = calculateTotal().toLocaleString('id-ID');
-    const msg = `Halo Admin, saya mau order:\n\nLayanan: ${serviceName}\nJumlah: ${quantity}\nDeadline: ${deadline}\nNama: ${name}\nCatatan: ${notes}\n\nEstimasi Total: Rp ${total}\n\nMohon info pembayaran QRIS-nya ya!`;
+    const msg = `Halo Gandaria Bakehouse, saya mau pesan:\n\nMenu: ${menuName}\nJumlah: ${quantity} pcs\nTanggal Pengiriman: ${deadline}\nNama: ${name}\nCatatan: ${notes}\n\nEstimasi Total: Rp ${total}\n\nMohon info ketersediaan dan QRIS-nya ya!`;
     const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
   };
@@ -296,11 +301,11 @@ function App() {
               <div className="bg-[#a87a5f] text-white p-6 rounded-t-2xl flex items-start justify-between">
                 <div className="flex gap-4 items-center">
                   <div className="bg-white/20 p-3 rounded-2xl">
-                    <Calculator className="w-8 h-8" />
+                    <ShoppingBag className="w-8 h-8" />
                   </div>
                   <div>
-                    <h2 className="font-display text-2xl font-bold uppercase tracking-wide leading-none mb-1">Form Order & Estimasi</h2>
-                    <p className="text-white/80 text-sm font-semibold">Hitung biaya tugasmu secara transparan, bisa langsung nego!</p>
+                    <h2 className="font-display text-2xl font-bold uppercase tracking-wide leading-none mb-1">Form Pemesanan</h2>
+                    <p className="text-white/80 text-sm font-semibold">Pesan pastry & roti favoritmu, fresh dari oven!</p>
                   </div>
                 </div>
                 <button onClick={() => setIsModalOpen(false)} className="text-white/60 hover:text-white bg-white/10 p-2 rounded-full transition">
@@ -314,24 +319,26 @@ function App() {
                 {/* Section 1: Selection */}
                 <div className="bg-white p-6 rounded-2xl border border-[#ebd8c1] shadow-sm">
                   <h3 className="flex items-center gap-2 text-[#a87a5f] font-bold text-sm mb-4 uppercase tracking-wider">
-                    <ClipboardList className="w-4 h-4" /> 1. Pilih Layanan & Volume Tugas
+                    <ClipboardList className="w-4 h-4" /> 1. Pilih Menu & Jumlah
                   </h3>
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div className="md:col-span-2">
-                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Jenis Tugas / Layanan</label>
+                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Pilih Menu</label>
                       <select 
                         value={serviceType}
                         onChange={(e) => setServiceType(Number(e.target.value))}
                         className="w-full bg-white border border-[#ebd8c1] rounded-xl px-4 py-3 text-sm font-semibold text-brand-brown outline-none focus:border-[#a87a5f]"
                       >
-                        <option value={5000}>PPT Presentasi — Rp 5.000/slide</option>
-                        <option value={10000}>Makalah / Artikel — Rp 10.000/lembar</option>
-                        <option value={50000}>Joki Coding — Mulai Rp 50.000/project</option>
+                        <option value={35000}>Sourdough Boule — Rp 35.000</option>
+                        <option value={40000}>Seeded Whole Grain — Rp 40.000</option>
+                        <option value={30000}>Rosemary Focaccia — Rp 30.000</option>
+                        <option value={20000}>Cookies Homemade — Rp 20.000</option>
+                        <option value={150000}>Roti Buaya Pamulang — Rp 150.000</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Jumlah (slide/lbr)</label>
+                      <label className="block text-xs font-bold text-[#a87a5f] mb-2">Jumlah (pcs)</label>
                       <input 
                         type="number" 
                         min="1"
@@ -348,8 +355,8 @@ function App() {
                       <p className="text-3xl font-display font-bold text-[#a87a5f]">Rp {calculateTotal().toLocaleString('id-ID')}</p>
                     </div>
                     <div className="text-right">
-                      <span className="inline-block bg-[#f4ebd8] text-[#a87a5f] text-[10px] font-bold px-3 py-1 rounded-full mb-1">✨ Bisa Nego!</span>
-                      <p className="text-[10px] text-brand-brown/60 font-semibold">Harga akhir fleksibel sesuai deadline</p>
+                      <span className="inline-block bg-[#f4ebd8] text-[#a87a5f] text-[10px] font-bold px-3 py-1 rounded-full mb-1">✨ Fresh Bake!</span>
+                      <p className="text-[10px] text-brand-brown/60 font-semibold">Pesanan di atas jam 2 siang dikirim besok</p>
                     </div>
                   </div>
                 </div>
@@ -360,14 +367,14 @@ function App() {
                     <label className="block text-xs font-bold text-[#a87a5f] mb-2">Nama / Panggilan Kamu</label>
                     <input 
                       type="text" 
-                      placeholder="Contoh: Sarah / Mahasiswa Sem 7"
+                      placeholder="Contoh: Sarah"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full bg-white border border-[#ebd8c1] rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-[#a87a5f]"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-[#a87a5f] mb-2">Target Deadline</label>
+                    <label className="block text-xs font-bold text-[#a87a5f] mb-2">Tanggal Pengiriman</label>
                     <div className="relative">
                       <input 
                         type="date" 
@@ -381,10 +388,10 @@ function App() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#a87a5f] mb-2">Catatan / Instruksi Khusus Dosen/Guru (Opsional)</label>
+                  <label className="block text-xs font-bold text-[#a87a5f] mb-2">Catatan Tambahan (Opsional)</label>
                   <textarea 
                     rows="3"
-                    placeholder="Contoh: Butuh format APA style 7th edition, referensi jurnal 5 tahun terakhir..."
+                    placeholder="Contoh: Tolong dipotong tipis, pita merah untuk hadiah..."
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="w-full bg-white border border-[#ebd8c1] rounded-xl px-4 py-3 text-sm font-semibold outline-none focus:border-[#a87a5f] resize-none"
@@ -412,7 +419,7 @@ function App() {
                   <div className="bg-[#fef8ef] border border-[#ebd8c1] rounded-2xl p-4 flex gap-3 items-start">
                     <Info className="w-4 h-4 text-[#a87a5f] mt-0.5 flex-shrink-0" />
                     <p className="text-[11px] text-[#a87a5f] leading-relaxed font-semibold">
-                      <strong>Pembayaran Aman:</strong> Pembayaran dilakukan setelah kesepakatan ruang lingkup & deadline dengan admin. DP atau pelunasan via transfer terverifikasi.
+                      <strong>Pembayaran Aman:</strong> Pemesanan akan diproses setelah bukti transfer diterima admin.
                     </p>
                   </div>
                 </div>
