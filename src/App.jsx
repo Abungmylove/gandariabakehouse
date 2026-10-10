@@ -14,7 +14,7 @@ const MENU_ITEMS = [
   { id: 'cookies', cat: "Camilan", name: "Cookies Homemade", price: 20000, img: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=500&auto=format&fit=crop" },
   { id: 'sourdough', cat: "Roti", name: "Sourdough Boule", price: 35000, img: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=500&auto=format&fit=crop" },
   { id: 'seeded', cat: "Roti", name: "Seeded Whole Grain", price: 40000, img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop" },
-  { id: 'rosemary', cat: "Roti", name: "Rosemary Focaccia", price: 30000, img: "https://images.unsplash.com/photo-1589367920969-ab8e050eb0e9?q=80&w=500&auto=format&fit=crop" }
+  { id: 'rosemary', cat: "Roti", name: "Rosemary Focaccia", price: 30000, img: "https://images.unsplash.com/photo-1598373182133-52452f7691ef?q=80&w=500&auto=format&fit=crop" }
 ];
 
 function App() {
