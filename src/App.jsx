@@ -272,32 +272,67 @@ function App() {
       <footer id="contact" className="bg-brand-brown text-brand-bg rounded-t-[3rem] mt-12 pt-16 pb-8 px-4 md:px-8 lg:px-16 overflow-hidden relative">
         <div className="max-w-7xl mx-auto relative z-10">
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-16">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16 items-start">
              <div>
                <h2 className="font-display text-6xl md:text-7xl font-bold uppercase leading-[0.9] text-brand-yellow mb-8">
                  Kunjungi<br/>Toko Kami
                </h2>
-               <div className="flex gap-4 items-center bg-white/5 p-4 rounded-2xl max-w-sm">
-                  <div className="w-12 h-12 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-white w-6 h-6" />
+               <div className="bg-white/5 p-6 rounded-[2rem] border border-white/10 max-w-lg backdrop-blur-sm">
+                  <div className="flex gap-4 items-start mb-4">
+                    <div className="w-12 h-12 bg-brand-red rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md">
+                      <MapPin className="text-white w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-brand-yellow">Naranda Bakery</h4>
+                      <p className="text-xs text-white/80 leading-relaxed mt-1">
+                        Jl. Kayu Manis Raya No.12, Pd. Cabe Udik, Kec. Pamulang, Kota Tangerang Selatan, Banten 15418
+                      </p>
+                      <p className="text-xs text-brand-yellow/80 mt-2 font-semibold">Selasa - Minggu | 07:30 - 17:00</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-sm">Naranda Bakery</h4>
-                    <p className="text-xs text-white/60">Jl. SouthCity No.14, Pamulang</p>
-                    <p className="text-xs text-white/60 mt-1">Selasa - Minggu | 07:30 - 17:00</p>
-                  </div>
+
+                  <a 
+                    href="https://maps.app.goo.gl/Gx3GhPUKQsLPWYuk7" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-2 bg-brand-yellow text-brand-brown font-bold text-xs px-5 py-3 rounded-full hover:bg-white transition shadow-md uppercase tracking-wider"
+                  >
+                    <MapPin className="w-4 h-4 text-brand-brown" /> Buka di Google Maps <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+               </div>
+
+               <div className="mt-6 bg-brand-bg text-brand-brown p-6 rounded-[2rem] shadow-xl max-w-lg">
+                 <h3 className="font-display text-xl font-bold uppercase mb-2">Dapatkan Promo Menarik</h3>
+                 <div className="flex gap-2">
+                   <input type="email" placeholder="Alamat email..." className="bg-white border border-brand-brown/20 rounded-full px-4 py-2.5 flex-1 text-sm outline-none focus:border-brand-brown" />
+                   <button className="bg-brand-red text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-brand-red-light transition flex-shrink-0">
+                     <ArrowRight className="w-4 h-4" />
+                   </button>
+                 </div>
                </div>
              </div>
              
-             <div className="flex flex-col justify-end">
-               <div className="bg-brand-bg text-brand-brown p-8 rounded-[2rem] shadow-xl">
-                 <h3 className="font-display text-2xl font-bold uppercase mb-4">Dapatkan Promo Menarik</h3>
-                 <div className="flex gap-2">
-                   <input type="email" placeholder="Alamat email..." className="bg-white border border-brand-brown/20 rounded-full px-4 py-3 flex-1 text-sm outline-none focus:border-brand-brown" />
-                   <button className="bg-brand-red text-white w-12 rounded-full flex items-center justify-center hover:bg-brand-red-light transition">
-                     <ArrowRight className="w-5 h-5" />
-                   </button>
+             <div>
+               <div className="w-full h-[360px] lg:h-[450px] rounded-[2.5rem] overflow-hidden border-4 border-white/20 shadow-2xl relative bg-brand-tan/10">
+                 <iframe
+                   title="Titik Lokasi Naranda Bakery di Google Maps"
+                   src="https://maps.google.com/maps?q=Naranda+Bakery,+Jl.+Kayu+Manis+Raya+No.12,+Pd.+Cabe+Udik,+Kec.+Pamulang,+Kota+Tangerang+Selatan,+Banten+15418&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                   className="w-full h-full border-0"
+                   loading="lazy"
+                   allowFullScreen
+                   referrerPolicy="no-referrer-when-downgrade"
+                 ></iframe>
+                 <div className="absolute top-4 left-4 bg-brand-brown/90 backdrop-blur-md text-brand-bg px-3.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 border border-white/10 shadow-md">
+                   <MapPin className="w-3.5 h-3.5 text-brand-yellow" /> Titik Maps Resmi
                  </div>
+                 <a 
+                   href="https://maps.app.goo.gl/Gx3GhPUKQsLPWYuk7"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   className="absolute bottom-4 right-4 bg-white hover:bg-brand-yellow text-brand-brown font-bold text-xs px-4 py-2 rounded-full shadow-lg transition flex items-center gap-1.5"
+                 >
+                   Buka Rute ↗
+                 </a>
                </div>
              </div>
           </div>
