@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingBag, ArrowRight, Globe, MapPin, Phone, Mail, ChevronLeft, ChevronRight, Star, Quote, Calculator, X, Calendar, ClipboardList, Info, QrCode, CheckCircle2, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import rotiBuayaImg from './assets/roti-buaya.jpeg';
 import './index.css';
 
 const fadeUp = {
@@ -9,7 +10,7 @@ const fadeUp = {
 };
 
 const MENU_ITEMS = [
-  { id: 'buaya', cat: "Spesial", name: "Roti Buaya Pamulang", price: 150000, img: "https://images.unsplash.com/photo-1555507036-ab1e4006a110?q=80&w=500&auto=format&fit=crop" },
+  { id: 'buaya', cat: "Spesial", name: "Roti Buaya Pamulang", price: 150000, img: rotiBuayaImg },
   { id: 'cookies', cat: "Camilan", name: "Cookies Homemade", price: 20000, img: "https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=80&w=500&auto=format&fit=crop" },
   { id: 'sourdough', cat: "Roti", name: "Sourdough Boule", price: 35000, img: "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=500&auto=format&fit=crop" },
   { id: 'seeded', cat: "Roti", name: "Seeded Whole Grain", price: 40000, img: "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop" },
