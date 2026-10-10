@@ -62,7 +62,7 @@ function App() {
     const menuListStr = orderedItems.map(item => `- ${item.name} (${cart[item.id]} pcs)`).join('\n');
     const total = calculateTotal().toLocaleString('id-ID');
     
-    const msg = `Halo Gandaria Bakehouse, saya mau pesan:\n\n${menuListStr}\n\nTanggal Pengiriman: ${deadline}\nNama: ${name}\nCatatan: ${notes || '-'}\n\nEstimasi Total: Rp ${total}\n\nMohon info ketersediaan dan QRIS-nya ya!`;
+    const msg = `Halo Naranda Bakery, saya mau pesan:\n\n${menuListStr}\n\nTanggal Pengiriman: ${deadline}\nNama: ${name}\nCatatan: ${notes || '-'}\n\nEstimasi Total: Rp ${total}\n\nMohon info ketersediaan dan QRIS-nya ya!`;
     const waUrl = `https://wa.me/6287802067617?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
   };
@@ -81,7 +81,7 @@ function App() {
           </div>
 
           <div className="flex-1 lg:w-1/3 flex justify-start lg:justify-center">
-            <h1 className="font-logo text-4xl font-bold tracking-tight text-white lowercase">gandaria</h1>
+            <h1 className="font-logo text-4xl font-bold tracking-tight text-white lowercase">naranda</h1>
           </div>
           
           <div className="flex items-center justify-end gap-4 lg:gap-8 text-xs font-bold tracking-wider uppercase text-white/80 lg:w-1/3">
@@ -282,7 +282,7 @@ function App() {
                     <MapPin className="text-white w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-sm">Gandaria Bakehouse</h4>
+                    <h4 className="font-bold text-sm">Naranda Bakery</h4>
                     <p className="text-xs text-white/60">Jl. SouthCity No.14, Pamulang</p>
                     <p className="text-xs text-white/60 mt-1">Selasa - Minggu | 07:30 - 17:00</p>
                   </div>
@@ -303,7 +303,7 @@ function App() {
           </div>
           
           <div className="flex flex-col md:flex-row justify-between items-center border-t border-white/10 pt-8 gap-4">
-             <h1 className="font-logo text-3xl font-bold tracking-tight text-white lowercase">gandaria</h1>
+             <h1 className="font-logo text-3xl font-bold tracking-tight text-white lowercase">naranda</h1>
              <div className="flex gap-6 text-xs font-bold uppercase tracking-widest text-white/60">
                <a href="#" className="hover:text-brand-yellow transition">Menu</a>
                <a href="#" className="hover:text-brand-yellow transition">Kisah</a>
